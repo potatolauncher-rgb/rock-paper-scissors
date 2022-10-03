@@ -21,15 +21,19 @@ function game () {
         if (playerSelection === computerSelection){
             const tie = console.log("It's a tie!");
             console.log(tie);
+            console.log("Player:","",playerScore);
+            console.log("Computer:","",computerScore);
         } else if (playerSelection === a && computerSelection === c || playerSelection === b && computerSelection === a || playerSelection === c && computerSelection === b ){
             playerScore++;
             const playerWin = "You win!";
             console.log (playerWin);
             console.log("Player:","",playerScore);
+            console.log("Computer:","",computerScore);
         } else if (computerSelection === a && playerSelection === c || computerSelection === b && playerSelection === a || computerSelection === c && playerSelection === b ){
             computerScore++;
             const compWin = "The computer wins!";
             console.log(compWin);
+            console.log("Player:","",playerScore);
             console.log("Computer:","",computerScore);
         } else {
             '' 
@@ -42,9 +46,16 @@ function game () {
         console.log(playerSelection);
         computerSelection = getComputerChoice();
         console.log(computerSelection);
-        playRound();         
+        playRound();               
 }
-    
+    if (playerScore > computerScore) {
+        console.log("You won the game!")
+    } else if (playerScore < computerScore) {
+        console.log("The computer won the game!")
+    } else {
+        console.log("You both tied! No one wins!")
+}
+
 }
 
 console.log(game())
