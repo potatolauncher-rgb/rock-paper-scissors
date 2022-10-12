@@ -1,63 +1,56 @@
-function game () {
     let playerScore = 0;
     let computerScore = 0;
+    const a = 'rock';
+    const b = 'paper';
+    const c = 'scissors';
+    const rock  = document.querySelector('#rock');
+    rock.onclick = () => playRound(a, getComputerChoice());
+    const paper  = document.querySelector('#paper');
+    paper.onclick = () => playRound(b, getComputerChoice());
+    const scissors  = document.querySelector('#scissors');
+    scissors.onclick = () => playRound(c, getComputerChoice());
 
-    function getComputerChoice () {
-        const gameOptions = [
-            'rock',
-            'paper',
-            'scissors'
-        ];
+    function getComputerChoice() {
+        const gameOptions = [a, b, c];
     
         randomItem = gameOptions[Math.floor(Math.random()*gameOptions.length)];   
     
         return randomItem.toString();
-}
+    }
 
-    function playRound () {
-        let a = 'rock';
-        let b = 'paper';
-        let c = 'scissors';
+    function keepScore() {
+        if (playerScore >= 5){
+            document.getElementById('announceWinner').innerText = `You win the game!`
+            setTimeout(location.reload.bind(location),1000);
+        } else if (computerScore >= 5){
+            document.getElementById('announceWinner').innerText = `The computer wins the game!`
+            setTimeout(location.reload.bind(location),1000);
+        }
+        return (`Player: ${playerScore} Computer: ${computerScore}`);
+    }
+    
+    function playRound(playerSelection, computerSelection) {
         if (playerSelection === computerSelection){
-            const tie = console.log("It's a tie!");
-            console.log(tie);
-            console.log("Player:","",playerScore);
-            console.log("Computer:","",computerScore);
+            document.getElementById('scoreboard').innerText = `It's a tie!`;
+            document.getElementById('runningTotal').innerText = keepScore()
         } else if (playerSelection === a && computerSelection === c || playerSelection === b && computerSelection === a || playerSelection === c && computerSelection === b ){
             playerScore++;
-            const playerWin = "You win!";
-            console.log (playerWin);
-            console.log("Player:","",playerScore);
-            console.log("Computer:","",computerScore);
+            document.getElementById('scoreboard').innerText = `The player wins!`;
+            document.getElementById('runningTotal').innerText = keepScore()
         } else if (computerSelection === a && playerSelection === c || computerSelection === b && playerSelection === a || computerSelection === c && playerSelection === b ){
             computerScore++;
-            const compWin = "The computer wins!";
-            console.log(compWin);
-            console.log("Player:","",playerScore);
-            console.log("Computer:","",computerScore);
+            document.getElementById('scoreboard').innerText = `The computer wins!`;
+            document.getElementById('runningTotal').innerText = keepScore()
         } else {
-            '' 
+            console.log(`Something went wrong.`)
         }
         
-} 
+    } 
 
-    for (let i = 0; i < 5; i++) {
-        playerSelection = prompt("rock, paper, or scissors?");
-        console.log(playerSelection);
-        computerSelection = getComputerChoice();
-        console.log(computerSelection);
-        playRound();               
-}
-    if (playerScore > computerScore) {
-        console.log("You won the game!")
-    } else if (playerScore < computerScore) {
-        console.log("The computer won the game!")
-    } else {
-        console.log("You both tied! No one wins!")
-}
-
-}
-
-console.log(game())
+    
+   
 
 
+
+
+   
